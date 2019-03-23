@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import BookList from "./components/BookList";
-import SearchBar from "./components/SearchBar";
-import BookShelf from "./components/BookShelf";
+import { BookList, SearchBar, BookShelf } from "./components";
 import { Route, Link } from "react-router-dom";
 
 const BooksApp = () => {
