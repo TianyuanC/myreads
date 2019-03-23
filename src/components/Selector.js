@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ShelfChanger = ({ book, onUpdate }) => {
+const Selector = ({ book, onUpdate }) => {
     if (!book.shelf) {
         book.shelf = "none";
     }
@@ -23,9 +23,9 @@ const ShelfChanger = ({ book, onUpdate }) => {
     );
 };
 
-ShelfChanger.propTypes = {
+Selector.propTypes = {
     onUpdate: PropTypes.func.isRequired,
     book: PropTypes.object.isRequired
 };
 
-export default ShelfChanger;
+export default Selector;

@@ -1,5 +1,5 @@
 import React from "react";
-import ShelfChanger from "./ShelfChanger";
+import Selector from "./Selector";
 import PropTypes from "prop-types";
 
 const Book = props => {
@@ -15,7 +15,7 @@ const Book = props => {
                         backgroundImage: `url(${imageUrl})`
                     }}
                 />
-                <ShelfChanger book={props.book} onUpdate={props.onUpdate} />
+                <Selector book={props.book} onUpdate={props.onUpdate} />
             </div>
             <div className="book-title">{title}</div>
             <div className="book-authors">{author}</div>
