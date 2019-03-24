@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import { BookList, SearchBar, BookShelf } from "./components";
-import { Route, Link } from "react-router-dom";
-
-const BooksApp = () => {
+import { Route } from "react-router-dom";
+import { HomeView } from "./view/HomeView";
+import { SearchView } from "./view/SearchView";
+export default () => {
     const [books, setBooks] = useState([]);
     const [booksIndex, setBooksIndex] = useState({});
     const [searchResult, setSearchResult] = useState([]);
 
-    const _handleSearchTerm = sTerm => {
+    const handleSearchTerm = sTerm => {
         if (!sTerm) {
-            _resetSearchResult();
+            resetSearchResult();
             return;
         }
         BooksAPI.search(sTerm, 10).then(books => {
             if (!books || !Array.isArray(books)) {
-                _resetSearchResult();
+                resetSearchResult();
                 return;
             }
 
@@ -38,11 +38,11 @@ const BooksApp = () => {
         });
     };
 
-    const _resetSearchResult = () => {
+    const resetSearchResult = () => {
         setSearchResult([]);
     };
 
-    const _handleShelfUpdate = (book, shelf) => {
+    const handleShelfUpdate = (book, shelf) => {
         book.shelf = shelf;
         const updatedBooks = books.filter(b => b.id !== book.id).concat(book);
         const updatedSearchResult = searchResult.map(b => {
@@ -81,66 +81,28 @@ const BooksApp = () => {
         });
     }, []);
 
-    const currentlyReadingBooks = books.filter(
-        book => book.shelf === "currentlyReading"
-    );
-    const wantToReadBooks = books.filter(book => book.shelf === "wantToRead");
-    const readBooks = books.filter(book => book.shelf === "read");
-
+    const homeViewProps = {
+        books,
+        resetSearchResult,
+        handleShelfUpdate
+    };
+    const searchViewProps = {
+        searchResult,
+        handleSearchTerm,
+        handleShelfUpdate
+    };
     return (
         <div className="app">
             <Route
                 path="/search"
-                render={() => (
-                    <div className="search-books">
-                        <SearchBar onSearch={_handleSearchTerm} />
-                        <div className="search-books-results">
-                            <BookList
-                                books={searchResult}
-                                onUpdate={_handleShelfUpdate}
-                            />
-                        </div>
-                    </div>
-                )}
+                render={() => <SearchView {...searchViewProps} />}
             />
 
             <Route
                 exact
                 path="/"
-                render={() => (
-                    <div className="list-books">
-                        <div className="list-books-title">
-                            <h1>MyReads</h1>
-                        </div>
-                        <div className="list-books-content">
-                            <div>
-                                <BookShelf
-                                    title="Currently Reading"
-                                    books={currentlyReadingBooks}
-                                    onUpdate={_handleShelfUpdate}
-                                />
-                                <BookShelf
-                                    title="Want to Read"
-                                    books={wantToReadBooks}
-                                    onUpdate={_handleShelfUpdate}
-                                />
-                                <BookShelf
-                                    title="Read"
-                                    books={readBooks}
-                                    onUpdate={_handleShelfUpdate}
-                                />
-                            </div>
-                        </div>
-                        <div className="open-search">
-                            <Link to="/search" onClick={_resetSearchResult}>
-                                Add a book
-                            </Link>
-                        </div>
-                    </div>
-                )}
+                render={() => <HomeView {...homeViewProps} />}
             />
         </div>
     );
 };
-
-export default BooksApp;
