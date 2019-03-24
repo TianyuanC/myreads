@@ -1,14 +1,11 @@
-import * as BooksAPI from "../BooksAPI";
-import { useEffect } from "react";
+import * as BooksAPI from "./BooksAPI";
+import { useState, useEffect } from "react";
 
-export default ({
-    books,
-    booksIndex,
-    searchResult,
-    setBooks,
-    setBooksIndex,
-    setSearchResult
-}) => {
+export default () => {
+    const [books, setBooks] = useState([]);
+    const [booksIndex, setBooksIndex] = useState({});
+    const [searchResult, setSearchResult] = useState([]);
+
     useEffect(() => {
         BooksAPI.getAll().then(books => {
             let booksIndex = {};
@@ -81,5 +78,11 @@ export default ({
         setSearchResult([]);
     };
 
-    return { handleShelfUpdate, handleSearchTerm, resetSearchResult };
+    return {
+        books,
+        searchResult,
+        handleShelfUpdate,
+        handleSearchTerm,
+        resetSearchResult
+    };
 };

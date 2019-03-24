@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
-import "./App.css";
 import { HomeView, SearchView } from "./view";
 import { useBooksApi } from "./effects";
+import "./App.css";
 
 export default () => {
-    const [books, setBooks] = useState([]);
-    const [booksIndex, setBooksIndex] = useState({});
-    const [searchResult, setSearchResult] = useState([]);
     const {
+        books,
+        searchResult,
         handleShelfUpdate,
         handleSearchTerm,
         resetSearchResult
-    } = useBooksApi({
-        books,
-        booksIndex,
-        searchResult,
-        setBooks,
-        setBooksIndex,
-        setSearchResult
-    });
+    } = useBooksApi();
 
     const homeViewProps = {
         books,
