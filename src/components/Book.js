@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Modal from 'react-bootstrap/Modal'
 
 const Book = props => {
-    const { title, author, imageUrl, id } = props.book;
+    const { title, author, imageUrl, id, description } = props.book;
     const [showPreview, setShowPreview] = useState(false);
     const openPreview = () => {
         setShowPreview(true)
@@ -14,7 +14,7 @@ const Book = props => {
     }
     return (
         <>
-            <a className="book">
+            <div className="book">
                 <div className="book-top">
                     <div
                         onClick={openPreview}
@@ -29,14 +29,20 @@ const Book = props => {
                 </div>
                 <div className="book-title">{title}</div>
                 <div className="book-authors">{author}</div>
-            </a>
-            <Modal show={showPreview} size="lg" onHide={closePreview}>
-                <iframe frameborder="0"
+            </div>
+            <Modal show={showPreview} onHide={closePreview} scrollable>
+                <iframe frameBorder="0"
                     scrolling="no"
                     style={{ border: 0 }}
                     src={`https://books.google.ca/books?id=${id}&lpg=PP1&pg=PP1&output=embed`}
-                    width={500} height={500}>
+                    width={500} height={600}>
                 </iframe>
+                {!!description &&
+                    (<Modal.Body scrollable style={{ height: 200 }}>
+                        <h2>Notes</h2>
+                        {description}
+                    </Modal.Body>)
+                }
             </Modal>
         </>
     );

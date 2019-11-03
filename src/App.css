@@ -121,7 +121,6 @@ body, .app {
 
 .book {
   width: 140px;
-  display: block;
   cursor: pointer;
 }
 .book-title,
@@ -130,6 +129,7 @@ body, .app {
 }
 .book-title {
   margin-top: 10px;
+  font-weight: bold;
 }
 .book-authors {
   color: #999;

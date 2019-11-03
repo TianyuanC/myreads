@@ -7,7 +7,7 @@ const categories = ["Currently Reading", "Want to Read", "Read"];
 export const HomeView = ({ books, handleShelfUpdate, resetSearchResult }) => (
     <div className="list-books">
         <div className="list-books-title">
-            <h1>MyReads</h1>
+            <h1>Ryan's Reads</h1>
         </div>
         <div className="list-books-content">
             <div>

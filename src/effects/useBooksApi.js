@@ -18,7 +18,8 @@ export default () => {
                     imageUrl: oBook.imageLinks
                         ? oBook.imageLinks.thumbnail
                         : null,
-                    shelf: oBook.shelf
+                    shelf: oBook.shelf,
+                    description: oBook.description
                 };
             });
             setBooks(booksView);
