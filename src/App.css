@@ -121,6 +121,8 @@ body, .app {
 
 .book {
   width: 140px;
+  display: block;
+  cursor: pointer;
 }
 .book-title,
 .book-authors {

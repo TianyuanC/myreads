@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { HomeView, SearchView } from "./view";
 import { useBooksApi } from "./effects";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 export default () => {
